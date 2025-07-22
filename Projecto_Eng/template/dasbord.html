@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - ISPSECURITY</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../static/css/estilos.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-base">
+
+  <div class="container-dashboard">
+
+   <aside class="sidebar">
+  <h1 class="logo">ISPSECURITY</h1>
+  <nav class="menu">
+    <a href="/dashboardAdmin" class="menu-item active">
+      <span class="material-symbols-outlined">dashboard</span>
+      Dashboard (Home)
+    </a>
+
+    <a href="/cadastro-veiculo" class="menu-item">
+      <span class="material-symbols-outlined">add_circle</span>
+      Cadastrar Veículo
+    </a>
+
+    <a href="/historico-acesso" class="menu-item">
+      <span class="material-symbols-outlined">history</span>
+      Histórico de Acessos
+    </a>
+
+    <a href="/gerenciar-veiculos" class="menu-item">
+      <span class="material-symbols-outlined">manage_accounts</span>
+      Gerenciar Veículos
+    </a>
+
+    <a href="/permissoes-acesso" class="menu-item">
+      <span class="material-symbols-outlined">car_rental</span>
+      Permissões de Usuários
+    </a>
+
+    <a href="/alertas" class="menu-item">
+      <span class="material-symbols-outlined">notifications</span>
+      Alertas
+    </a>
+
+    <a href="/relatorios" class="menu-item">
+      <span class="material-symbols-outlined">bar_chart</span>
+      Relatórios
+    </a>
+
+    <a href="/configuracoes" class="menu-item">
+      <span class="material-symbols-outlined">settings</span>
+      Configurações
+    </a>
+  </nav>
+</aside>
+
+
+    <!-- Conteúdo principal -->
+    <main class="main-content">
+
+      <!-- Topo -->
+      <div class="topbar">
+        <div class="titulo-dashboard"><span class="material-symbols-outlined">
+          browse
+          </span> 
+          Dashboard</div>
+        <button id="logout" class="btn-sair">⏻</button>
+      </div>
+      
+              <!-- Cards estatísticos -->
+        <div class="cards-grid">
+          <div class="card">
+            <div class="icon"><span class="material-symbols-outlined">no_crash</span></div>
+            <h3>Veículos Autorizados</h3>
+            <p id="totalVeiculos" class="valor">0</p> <!-- ID adicionado -->
+            <button class="botao-arredondada">Número total cadastrados</button>
+          </div>
+
+          <div class="card">
+            <div class="icon"><span class="material-symbols-outlined">block</span></div>
+            <h3>Tentativas negadas</h3>
+            <p id="tentativasNegadas" class="valor">0</p> <!-- ID adicionado -->
+            <button class="botao-arredondada">Últimas 24h</button>
+          </div>
+
+          <div class="card">
+            <div class="icon"><span class="material-symbols-outlined">event_available</span></div>
+            <h3>Acessos totais do dia</h3>
+            <p id="acessosDia" class="valor">0</p> <!-- ID adicionado -->
+            <button class="botao-arredondada">Entrada/Saída</button>
+          </div>
+
+          <div class="card">
+            <div class="icon"><span class="material-symbols-outlined">autorenew</span></div>
+            <h3>Sincronizações pendentes</h3>
+            <p id="pendencias" class="valor">0</p> <!-- ID adicionado -->
+            <button class="botao-arredondada">Sistema offline</button>
+          </div>
+        </div>
+
+        <!-- Tabela e gráfico -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Tabela de acessos -->
+        <div class="bg-white p-6 rounded-xl shadow">
+          <h2 class="text-lg font-semibold mb-4">Últimos acessos</h2>
+          <table class="w-full text-sm text-left">
+            <thead>
+              <tr class="text-gray-500 border-b">
+                <th class="pb-2">Hora</th>
+                <th class="pb-2">Matrícula</th>
+                <th class="pb-2">Estado</th>
+              </tr>
+            </thead>
+            <tbody id="tabela-acessos">
+              <!-- Preenchido dinamicamente -->
+              <tr>
+                <td class="py-2">10:30</td>
+                <td>LD-51-15-HZ</td>
+                <td><span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded">Autorizado</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Gráfico -->
+       <div class="bg-white p-6 rounded-xl shadow">
+          <h2 class="text-lg font-semibold mb-4">Fluxo de Acesso (Horas)</h2>
+          <canvas id="grafico-acessos" height="200"></canvas>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="../static/js/dashbour.js"></script>
+</body>
+</html>

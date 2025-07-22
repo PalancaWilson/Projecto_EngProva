@@ -1,0 +1,6 @@
+path: C:/Users/Mario/Documents/Projecto_Engoutraparte/Projecto_Eng/dataset_preparado
+train: train
+val: val
+names:
+  0: Nissan_Kicks_vermelho
+  1: Toyota_Hilux_branca

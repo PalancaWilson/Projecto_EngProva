@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastrar Veículo - ISPSECURITY</title>
+
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Material Symbols (ícones) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+  <!-- CSS personalizado -->
+  <link rel="stylesheet" href="/static/css/estilo_cadastro.css">
+</head>
+<body class="bg-base">
+
+  <div class="container-dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+  <h1 class="logo">ISPSECURITY</h1>
+  <nav class="menu">
+    <a href="/dashboardAdmin" class="menu-item active">
+      <span class="material-symbols-outlined">dashboard</span>
+      Dashboard (Home)
+    </a>
+
+    <a href="/cadastro-veiculo" class="menu-item">
+      <span class="material-symbols-outlined">add_circle</span>
+      Cadastrar Veículo
+    </a>
+
+    <a href="/historico-acesso" class="menu-item">
+      <span class="material-symbols-outlined">history</span>
+      Histórico de Acessos
+    </a>
+
+    <a href="/gerenciar-veiculos" class="menu-item">
+      <span class="material-symbols-outlined">manage_accounts</span>
+      Gerenciar Veículos
+    </a>
+
+    <a href="/permissoes-acesso" class="menu-item">
+      <span class="material-symbols-outlined">car_rental</span>
+      Permissões de Usuários
+    </a>
+
+    <a href="/alertas" class="menu-item">
+      <span class="material-symbols-outlined">notifications</span>
+      Alertas
+    </a>
+
+    <a href="/relatorios" class="menu-item">
+      <span class="material-symbols-outlined">bar_chart</span>
+      Relatórios
+    </a>
+
+    <a href="/configuracoes" class="menu-item">
+      <span class="material-symbols-outlined">settings</span>
+      Configurações
+    </a>
+  </nav>
+</aside>
+
+
+    <!-- Conteúdo principal -->
+    <main class="main-content">
+
+      <!-- Topo -->
+      <div class="topbar">
+        <div class="titulo-dashboard">
+          <span class="material-symbols-outlined">add_circle</span>
+          Cadastrar Veículo
+        </div>
+        <button id="logout" class="btn-sair">
+          <span class="material-symbols-outlined">power_settings_new</span>
+        </button>
+      </div>
+
+      <!-- Formulário de cadastro -->
+      <div class="form-card">
+        <h2 class="form-title">Informe os dados do veículo</h2>
+        <p class="form-note">* Todos os campos do formulário são obrigatórios</p>
+
+         <form id="formCadastroVeiculo" enctype="multipart/form-data" class="space-y-4">
+
+      <!-- Matrícula -->
+      <div class="mb-4">
+        <label for="matricula" class="block font-medium mb-1">Matrícula</label>
+        <input type="text" id="matricula" name="matricula" required
+               class="w-full border px-4 py-2 rounded" placeholder="Ex: LD-51-15-HZ" />
+      </div>
+
+      <!-- Proprietário -->
+      <div class="mb-4">
+        <label for="proprietario" class="block font-medium mb-1">Nome do Proprietário</label>
+        <input type="text" id="proprietario" name="proprietario" required
+               class="w-full border px-4 py-2 rounded" placeholder="Ex: João Manuel" />
+      </div>
+      
+<!-- ID do Frequentador -->
+<div class="mb-4">
+  <label for="id_frequentador" class="block font-medium mb-1">ID do Frequentador</label>
+  <input type="number" id="id_frequentador" name="id_frequentador" required
+         class="w-full border px-4 py-2 rounded" placeholder="Digite o ID do Frequentador" />
+</div>
+
+<!-- Tipo do Usuário (preenchido automaticamente) -->
+<div class="mb-4">
+  <label for="tipo_usuario" class="block font-medium mb-1">Tipo de Usuário</label>
+  <input type="text" id="tipo_usuario" name="tipo_usuario" readonly
+         class="w-full border px-4 py-2 rounded bg-gray-100" placeholder="Tipo será preenchido automaticamente" />
+</div>
+
+      <!-- Marca -->
+      <div class="mb-4">
+        <label for="marca" class="block font-medium mb-1">Marca</label>
+        <input type="text" id="marca" name="marca" class="w-full border px-4 py-2 rounded" placeholder="Ex: Toyota" />
+      </div>
+
+      <!-- Modelo -->
+      <div class="mb-4">
+        <label for="modelo" class="block font-medium mb-1">Modelo</label>
+        <input type="text" id="modelo" name="modelo" class="w-full border px-4 py-2 rounded" placeholder="Ex: Corolla" />
+      </div>
+
+      <!-- Estado -->
+      <div class="mb-4">
+        <label for="estado" class="block font-medium mb-1">Estado do Veículo</label>
+        <select id="estado" name="estado" class="w-full border px-4 py-2 rounded">
+          <option value="Ativo" selected>Ativo</option>
+          <option value="Inativo">Inativo</option>
+        </select>
+      </div>
+
+      <!-- Imagem -->
+      <div class="mb-6">
+        <label for="imagem" class="block font-medium mb-1">Imagem do Veículo</label>
+        <input type="file" id="imagem" name="imagem" accept="image/*" class="w-full" />
+      </div>
+
+      <!-- Botão de envio -->
+      <button type="submit"
+              class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+        Cadastrar Veículo
+      </button>
+    </form>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="/static/js/cadastrarVeiculo.js"></script>
+</body>
+</html>

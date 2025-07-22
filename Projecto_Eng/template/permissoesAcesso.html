@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Histórico de Acessos - ISPSECURITY</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Ícones Material -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+  <!-- Estilos personalizados -->
+  <link rel="stylesheet" href="../static/css/permissoes.css">
+</head>
+<body class="bg-base">
+
+  <div class="container-dashboard">
+
+    <aside class="sidebar">
+  <h1 class="logo">ISPSECURITY</h1>
+  <nav class="menu">
+    <a href="/dashboardAdmin" class="menu-item ">
+      <span class="material-symbols-outlined">dashboard</span>
+      Dashboard (Home)
+    </a>
+
+    <a href="/cadastro-veiculo" class="menu-item">
+      <span class="material-symbols-outlined">add_circle</span>
+      Cadastrar Veículo
+    </a>
+
+    <a href="/historico-acesso" class="menu-item">
+      <span class="material-symbols-outlined">history</span>
+      Histórico de Acessos
+    </a>
+
+    <a href="/gerenciar-veiculos" class="menu-item">
+      <span class="material-symbols-outlined">manage_accounts</span>
+      Gerenciar Veículos
+    </a>
+
+    <a href="/permissoes-acesso" class="menu-item active">
+      <span class="material-symbols-outlined">car_rental</span>
+      Permissões de Usuários
+    </a>
+
+    <a href="/alertas" class="menu-item">
+      <span class="material-symbols-outlined">notifications</span>
+      Alertas
+    </a>
+
+    <a href="/relatorios" class="menu-item">
+      <span class="material-symbols-outlined">bar_chart</span>
+      Relatórios
+    </a>
+
+    <a href="/configuracoes" class="menu-item">
+      <span class="material-symbols-outlined">settings</span>
+      Configurações
+    </a>
+  </nav>
+</aside>
+
+    <!-- Conteúdo principal -->
+    <main class="main-content">
+
+      <!-- Topo -->
+      <div class="topbar">
+        <div class="titulo-dashboard">
+          <span class="material-symbols-outlined">car_rental</span>
+          Permissões de Veículos
+        </div>
+        <button id="logout" class="btn-sair">
+          <span class="material-symbols-outlined">power_settings_new</span>
+        </button>
+      </div>
+
+              <!-- Filtros -->
+        <div class="bg-white p-6 rounded-xl shadow-sm mb-6">
+          <div class="flex flex-wrap gap-4">
+          
+            <!-- Campo de Pesquisa -->
+            <div class="flex items-center bg-gray-100 text-sm px-4 py-2 rounded flex-1">
+              <span class="material-symbols-outlined text-gray-500 mr-2 text-base">search</span>
+              <input type="text" placeholder="Pesquisar matrícula ou proprietário" class="bg-transparent outline-none flex-1" />
+            </div>
+
+                <button type="submit"
+                  class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+                Buscar Matrícula
+                </button>
+                
+                 <!-- Info da matrícula -->
+                <!-- Botão para habilitar edição -->
+                <div class="flex justify-end mt-4">
+                  <button type="button" id="btnEditar" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition">
+                    Editar Permissões
+                  </button>
+                </div>
+          </div>
+          
+          <!-- Info da matrícula -->
+    <div class="matricula-info">
+      <h2>LD - 61 - 72 - HA</h2>
+      <p>João Silva</p>
+    </div>
+
+         <!-- ... cabeçalho permanece igual ... -->
+          <!-- Formulário -->
+          <form class="formulario mt-4">
+            <label for="validade">Nova validade de acesso <span class="text-red-500">*</span></label>
+            <input type="date" id="validade" required class="border p-2 rounded" disabled />
+
+            <label for="horario">Novo horário de acesso <span class="text-red-500">*</span></label>
+            <select id="horario" required class="border p-2 rounded" disabled>
+              <option value="07:00-18:00">07:00 - 18:00</option>
+              <option value="09:00-19:00">09:00 - 19:00</option>
+              <option value="24h">Acesso 24h</option>
+            </select>
+
+            <label for="tipoUsuario">Alterar tipo de usuário <span class="text-red-500">*</span></label>
+            <select id="tipoUsuario" required class="border p-2 rounded" disabled>
+              <option value="Docente">Docente</option>
+              <option value="Estudante">Estudante</option>
+              <option value="Funcionário">Funcionário</option>
+              <option value="Visitante">Visitante</option>
+              <option value="Administrador">Administrador</option>
+            </select>
+
+            <!-- NOVO CAMPO: Estado do Veículo -->
+            <label for="estadoVeiculo">Estado do Veículo <span class="text-red-500">*</span></label>
+            <select id="estadoVeiculo" required class="border p-2 rounded" disabled>
+              <option value="Ativo">Ativo</option>
+              <option value="Inativo">Inativo</option>
+            </select>
+
+            <button type="submit" class="btn-save mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
+              Salvar Alterações
+            </button>
+          </form>
+
+
+        </div>
+
+        </div>
+
+    </main>
+  </div>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+  const btnBuscar = document.querySelector("button[type='submit']");
+  const btnEditar = document.getElementById("btnEditar");
+  const inputBusca = document.querySelector("input[type='text']");
+  const campoValidade = document.getElementById("validade");
+  const campoHorario = document.getElementById("horario");
+  const campoTipoUsuario = document.getElementById("tipoUsuario");
+  const campoEstadoVeiculo = document.getElementById("estadoVeiculo");
+  const form = document.querySelector(".formulario");
+  const infoMatricula = document.querySelector(".matricula-info h2");
+  const infoNome = document.querySelector(".matricula-info p");
+
+  let idPermissaoAtual = null;
+  let idFrequentadorAtual = null;
+
+  // Busca a matrícula
+  btnBuscar.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const termo = inputBusca.value.trim();
+    if (!termo) {
+      alert("Digite a matrícula ou nome do proprietário.");
+      return;
+    }
+
+    try {
+      const res = await fetch("http://localhost:5000/api/permissoes");
+      const permissoes = await res.json();
+
+      const resultado = permissoes.find(
+        p => p.matricula.toLowerCase() === termo.toLowerCase() || 
+             p.proprietario.toLowerCase().includes(termo.toLowerCase())
+      );
+
+      if (!resultado) {
+        alert("Matrícula ou proprietário não encontrado.");
+        return;
+      }
+
+      // Atualiza dados visuais
+      idPermissaoAtual = resultado.id_permissao;
+      idFrequentadorAtual = resultado.id_frequentador;
+      infoMatricula.textContent = resultado.matricula;
+      infoNome.textContent = resultado.nome_frequentador;
+
+      campoValidade.value = resultado.validade;
+      campoHorario.value = resultado.horario_acesso;
+      campoTipoUsuario.value = resultado.tipo_usuario;
+      campoEstadoVeiculo.value = resultado.estado_veiculo;
+
+    } catch (err) {
+      console.error("Erro ao buscar permissões:", err);
+      alert("Erro ao buscar dados.");
+    }
+  });
+
+  // Habilita campos para edição
+  btnEditar.addEventListener("click", () => {
+    campoValidade.disabled = false;
+    campoHorario.disabled = false;
+    campoTipoUsuario.disabled = false;
+    campoEstadoVeiculo.disabled = false;
+  });
+
+  // Envia atualização
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!idPermissaoAtual || !idFrequentadorAtual) {
+      alert("Busque uma matrícula primeiro.");
+      return;
+    }
+
+    const payload = {
+      validade: campoValidade.value,
+      horario_acesso: campoHorario.value,
+      tipo_usuario: campoTipoUsuario.value,
+      estado_veiculo: campoEstadoVeiculo.value,
+      id_frequentador: idFrequentadorAtual
+    };
+
+    try {
+      const res = await fetch(`http://localhost:5000/api/permissoes/${idPermissaoAtual}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const resposta = await res.json();
+      if (res.ok && resposta.status === "sucesso") {
+        alert("Permissão atualizada com sucesso!");
+        campoValidade.disabled = true;
+        campoHorario.disabled = true;
+        campoTipoUsuario.disabled = true;
+        campoEstadoVeiculo.disabled = true;
+      } else {
+        alert("Erro ao atualizar: " + resposta.mensagem);
+      }
+
+    } catch (err) {
+      console.error("Erro ao enviar atualização:", err);
+      alert("Falha ao atualizar permissões.");
+    }
+  });
+});
+
+</script>
+</body>
+</html>
